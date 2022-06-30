@@ -110,7 +110,6 @@ public class TeacherController {
     public Result getTeacher(@PathVariable("id")Long id){
         Teacher teacher = teacherService.getById(id);
         return Result.ok(teacher);
-
     }
     @ApiOperation("修改最终实现")
     @PostMapping("updateTeacher")
@@ -122,5 +121,17 @@ public class TeacherController {
             return Result.fail(null);
         }
     }
+
+    @ApiOperation(value = "批量删除讲师")
+    @DeleteMapping("removeBatch")
+    public Result removeBatch(@RequestBody List<Long> idList){
+        boolean isSuccess = teacherService.removeByIds(idList);
+        if(isSuccess) {
+            return Result.ok(null);
+        } else {
+            return Result.fail(null);
+        }
+    }
+
 }
 
