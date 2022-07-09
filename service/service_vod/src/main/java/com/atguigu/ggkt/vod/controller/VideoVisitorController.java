@@ -23,7 +23,7 @@ import java.util.Map;
 @Api(value = "VideoVisitor管理", tags = "VideoVisitor管理")
 @RestController
 @RequestMapping(value="/admin/vod/videoVisitor")
-@CrossOrigin
+//@CrossOrigin
 @Slf4j
 public class VideoVisitorController {
 

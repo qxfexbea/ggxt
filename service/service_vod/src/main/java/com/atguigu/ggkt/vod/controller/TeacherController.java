@@ -28,7 +28,7 @@ import java.util.List;
 @Api(tags = "讲师管理接口")
 @RestController
 @RequestMapping(value="/admin/vod/teacher")
-@CrossOrigin//解决跨域
+//@CrossOrigin//解决跨域
 public class TeacherController {
 
     @Autowired
