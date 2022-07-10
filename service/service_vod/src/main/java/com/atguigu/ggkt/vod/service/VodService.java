@@ -7,4 +7,6 @@ public interface VodService {
     String uploadVideo(InputStream inputStream, String originalFilename);
     //删除视频
     void removeVideo(String videoSourceId);
+
+    Object getPlayAuth(Long courseId, Long videoId);
 }

@@ -3,6 +3,7 @@ package com.atguigu.ggkt.vod.mapper;
 
 import com.atguigu.ggkt.model.vod.Course;
 import com.atguigu.ggkt.vo.vod.CoursePublishVo;
+import com.atguigu.ggkt.vo.vod.CourseVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -16,4 +17,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface CourseMapper extends BaseMapper<Course> {
     //根据id获取课程发布信息
     CoursePublishVo selectCoursePublishVoById(Long id);
+
+    CourseVo selectCourseVoById(Long id);
 }

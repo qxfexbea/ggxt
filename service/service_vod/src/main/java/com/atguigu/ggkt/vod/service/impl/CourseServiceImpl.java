@@ -5,9 +5,8 @@ import com.atguigu.ggkt.model.vod.Course;
 import com.atguigu.ggkt.model.vod.CourseDescription;
 import com.atguigu.ggkt.model.vod.Subject;
 import com.atguigu.ggkt.model.vod.Teacher;
-import com.atguigu.ggkt.vo.vod.CourseFormVo;
-import com.atguigu.ggkt.vo.vod.CoursePublishVo;
-import com.atguigu.ggkt.vo.vod.CourseQueryVo;
+import com.atguigu.ggkt.vo.vod.*;
+
 import com.atguigu.ggkt.vod.mapper.CourseMapper;
 import com.atguigu.ggkt.vod.service.*;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -195,5 +194,32 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         descriptionService.removeById(id);
         //根据课程id删除课程
         baseMapper.deleteById(id);
+    }
+
+
+    //根据id查询课程
+    @Override
+    public Map<String, Object> getInfoById(Long id) {
+        //更新流量量
+        Course course = baseMapper.selectById(id);
+        course.setViewCount(course.getViewCount() + 1);
+        baseMapper.updateById(course);
+
+        Map<String, Object> map = new HashMap<>();
+        CourseVo courseVo = baseMapper.selectCourseVoById(id);
+        List<ChapterVo> chapterVoList = chapterService.getNestedTreeList(id);
+        CourseDescription courseDescription = descriptionService.getById(id);
+        Teacher teacher = teacherService.getById(course.getTeacherId());
+
+        //TODO后续完善
+        Boolean isBuy = false;
+
+        map.put("courseVo", courseVo);
+        map.put("chapterVoList", chapterVoList);
+        map.put("description", null != courseDescription ?
+                courseDescription.getDescription() : "");
+        map.put("teacher", teacher);
+        map.put("isBuy", isBuy);//是否购买
+        return map;
     }
 }

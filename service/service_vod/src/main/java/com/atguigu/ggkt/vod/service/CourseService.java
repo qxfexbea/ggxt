@@ -33,4 +33,6 @@ public interface CourseService extends IService<Course> {
     boolean publishCourseById(Long id);
 
     void removeCourseById(Long id);
+
+    Map<String, Object> getInfoById(Long courseId);
 }
